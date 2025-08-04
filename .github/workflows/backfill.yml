@@ -1,0 +1,20 @@
+name: 1. Nap Du Lieu Lich Su (Chay 1 Lan)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Create Google Credentials File
+        run: echo "${{ secrets.GCP_SA_KEY }}" > credentials.json
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Backfill Script
+        run: python backfill_data.py
