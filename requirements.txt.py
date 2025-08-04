@@ -1,7 +1,0 @@
-vnstock
-gspread
-google-auth-oauthlib
-pandas
-requests
-paho-mqtt
-python-dotenv
