@@ -1,0 +1,23 @@
+name: 2. Bot Cap Nhat Hang Ngay
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Chạy vào lúc 17:00 giờ Việt Nam (10:00 UTC), từ Thứ Hai đến Thứ Sáu
+    - cron: '0 10 * * 1-5'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Create Google Credentials File
+        run: echo "${{ secrets.GCP_SA_KEY }}" > credentials.json
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Bot Script
+        run: python run_bot.py
